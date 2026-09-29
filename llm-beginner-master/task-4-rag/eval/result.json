@@ -1,0 +1,239 @@
+[
+  {
+    "test": "chunking_sanity",
+    "pass": true,
+    "chunks": 17,
+    "avg_len": 241.9,
+    "expected_avg_range": [
+      128.0,
+      307.2
+    ]
+  },
+  {
+    "test": "nndl_gold_recall_at_10",
+    "pass": true,
+    "n": 30,
+    "recall_at_1": 0.333,
+    "recall_at_3": 0.7,
+    "recall_at_5": 0.867,
+    "recall_at_10": 0.867,
+    "mrr": 0.527,
+    "details": [
+      {
+        "id": "nndl-fnn-basic",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "信息沿着网络从输入到输出单向传播",
+        "source_file": "../神经网络与深度学习2/chap-前馈神经网络/chap-前馈神经网络.tex"
+      },
+      {
+        "id": "nndl-ad-vs-symbolic",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "自动微分既不是通过有限差分来近似导数",
+        "source_file": "../神经网络与深度学习2/chap-前馈神经网络/chap-前馈神经网络.tex"
+      },
+      {
+        "id": "nndl-cnn-structure",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "卷积神经网络有三个核心的结构特性",
+        "source_file": "../神经网络与深度学习2/chap-卷积神经网络/chap-卷积神经网络.tex"
+      },
+      {
+        "id": "nndl-rnn-memory",
+        "hit": true,
+        "rank": 2,
+        "matched_anchor": "通过在时间维度上传递",
+        "source_file": "../神经网络与深度学习2/chap-循环神经网络/chap-循环神经网络.tex"
+      },
+      {
+        "id": "nndl-transformer-attention",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "多头自注意力、位置编码、前馈网络、残差连接和规范化",
+        "source_file": "../神经网络与深度学习2/chap-绪论/chap-绪论.tex"
+      },
+      {
+        "id": "nndl-inductive-bias",
+        "hit": false,
+        "rank": null,
+        "matched_anchor": null,
+        "source_file": "../神经网络与深度学习2/chap-绪论/chap-绪论.tex"
+      },
+      {
+        "id": "nndl-rl-differences",
+        "hit": true,
+        "rank": 3,
+        "matched_anchor": "与监督学习相比，强化学习至少有三点主要不同",
+        "source_file": "../神经网络与深度学习2/chap-深度强化学习/chap-深度强化学习.tex"
+      },
+      {
+        "id": "nndl-deep-rl",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "结合起来：前者给出交互式决策问题的建模方式与优化目标",
+        "source_file": "../神经网络与深度学习2/chap-深度强化学习/chap-深度强化学习.tex"
+      },
+      {
+        "id": "nndl-ml-elements",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "数据、模型、学习准则、优化算法和评价指标",
+        "source_file": "../神经网络与深度学习2/chap-机器学习概述/chap-机器学习概述.tex"
+      },
+      {
+        "id": "nndl-erm-overfitting-srm",
+        "hit": true,
+        "rank": 2,
+        "matched_anchor": "仅仅最小化训练集上的经验风险并不能保证模型具有良好的泛化能力",
+        "source_file": "../神经网络与深度学习2/chap-机器学习概述/chap-机器学习概述.tex"
+      },
+      {
+        "id": "nndl-learning-types",
+        "hit": false,
+        "rank": null,
+        "matched_anchor": null,
+        "source_file": "../神经网络与深度学习2/chap-机器学习概述/chap-机器学习概述.tex"
+      },
+      {
+        "id": "nndl-linear-models",
+        "hit": true,
+        "rank": 3,
+        "matched_anchor": "四种不同线性分类模型：Logistic回归、Softmax回归、感知器和支持向量机",
+        "source_file": "../神经网络与深度学习2/chap-线性模型/chap-线性模型.tex"
+      },
+      {
+        "id": "nndl-logistic-softmax",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "是Logistic回归在多分类问题上的推广",
+        "source_file": "../神经网络与深度学习2/chap-线性模型/chap-线性模型.tex"
+      },
+      {
+        "id": "nndl-perceptron-svm",
+        "hit": true,
+        "rank": 2,
+        "matched_anchor": "通过最大化分类间隔来寻找更稳健的分割超平面",
+        "source_file": "../神经网络与深度学习2/chap-线性模型/chap-线性模型.tex"
+      },
+      {
+        "id": "nndl-gradient-issues",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "误差经过每一层传递都会不断衰减",
+        "source_file": "../神经网络与深度学习2/chap-前馈神经网络/chap-前馈神经网络.tex"
+      },
+      {
+        "id": "nndl-optimization-regularization",
+        "hit": true,
+        "rank": 2,
+        "matched_anchor": "在网络优化方面，介绍一些常用的优化算法",
+        "source_file": "../神经网络与深度学习2/chap-网络优化与正则化/chap-网络优化与正则化.tex"
+      },
+      {
+        "id": "nndl-adamw-weight-decay",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "根据任务梯度优化目标函数",
+        "source_file": "../神经网络与深度学习2/chap-网络优化与正则化/chap-网络优化与正则化.tex"
+      },
+      {
+        "id": "nndl-self-attention-cost",
+        "hit": true,
+        "rank": 3,
+        "matched_anchor": "更容易建模长距离依赖",
+        "source_file": "../神经网络与深度学习2/chap-注意力机制与Transformer/chap-注意力机制与Transformer.tex"
+      },
+      {
+        "id": "nndl-position-encoding-rope",
+        "hit": true,
+        "rank": 3,
+        "matched_anchor": "Transformer需要显式注入位置信息",
+        "source_file": "../神经网络与深度学习2/chap-注意力机制与Transformer/chap-注意力机制与Transformer.tex"
+      },
+      {
+        "id": "nndl-causal-mask",
+        "hit": false,
+        "rank": null,
+        "matched_anchor": null,
+        "source_file": "../神经网络与深度学习2/chap-注意力机制与Transformer/chap-注意力机制与Transformer.tex"
+      },
+      {
+        "id": "nndl-flashattention-gqa",
+        "hit": true,
+        "rank": 5,
+        "matched_anchor": "不是一次性构造完整的",
+        "source_file": "../神经网络与深度学习2/chap-注意力机制与Transformer/chap-注意力机制与Transformer.tex"
+      },
+      {
+        "id": "nndl-gnn-message-passing",
+        "hit": true,
+        "rank": 4,
+        "matched_anchor": "通过在节点之间传播和聚合信息来学习表示",
+        "source_file": "../神经网络与深度学习2/chap-图神经网络/chap-图神经网络.tex"
+      },
+      {
+        "id": "nndl-gnn-layer-depth",
+        "hit": true,
+        "rank": 3,
+        "matched_anchor": "一层GNN只能让一篇论文接收到其直接相邻论文的信息",
+        "source_file": "../神经网络与深度学习2/chap-图神经网络/chap-图神经网络.tex"
+      },
+      {
+        "id": "nndl-graphsage-gat",
+        "hit": true,
+        "rank": 2,
+        "matched_anchor": "把“邻居采样”作为计算图的一部分",
+        "source_file": "../神经网络与深度学习2/chap-图神经网络/chap-图神经网络.tex"
+      },
+      {
+        "id": "nndl-gnn-common-issues",
+        "hit": true,
+        "rank": 4,
+        "matched_anchor": "节点表示在反复聚合后逐渐趋同",
+        "source_file": "../神经网络与深度学习2/chap-图神经网络/chap-图神经网络.tex"
+      },
+      {
+        "id": "nndl-pca-autoencoder",
+        "hit": false,
+        "rank": null,
+        "matched_anchor": null,
+        "source_file": "../神经网络与深度学习2/chap-无监督学习/chap-无监督学习.tex"
+      },
+      {
+        "id": "nndl-clustering-ssl-eval",
+        "hit": true,
+        "rank": 5,
+        "matched_anchor": "组内平方误差、轮廓系数等内部指标",
+        "source_file": "../神经网络与深度学习2/chap-无监督学习/chap-无监督学习.tex"
+      },
+      {
+        "id": "nndl-transfer-continual-meta",
+        "hit": true,
+        "rank": 4,
+        "matched_anchor": "在任务分布层面学习一种快速适应机制",
+        "source_file": "../神经网络与深度学习2/chap-模型独立的学习方式/chap-模型独立的学习方式.tex"
+      },
+      {
+        "id": "nndl-dqn-ppo-world-model",
+        "hit": true,
+        "rank": 2,
+        "matched_anchor": "世界模型的价值在于",
+        "source_file": "../神经网络与深度学习2/chap-深度强化学习/chap-深度强化学习.tex"
+      },
+      {
+        "id": "nndl-rag-flow-eval",
+        "hit": true,
+        "rank": 1,
+        "matched_anchor": "RAG的基本流程分为三个阶段",
+        "source_file": "../神经网络与深度学习2/chap-大语言模型与智能体/chap-大语言模型与智能体.tex"
+      }
+    ]
+  },
+  {
+    "test": "rag_end_to_end",
+    "pass": false,
+    "error": "连不上本地生成服务 http://localhost:11434/v1：HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /v1/chat/completions (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。\"))\n请先启动模型服务，例如：ollama serve && ollama pull qwen2.5:7b-instruct"
+  }
+]

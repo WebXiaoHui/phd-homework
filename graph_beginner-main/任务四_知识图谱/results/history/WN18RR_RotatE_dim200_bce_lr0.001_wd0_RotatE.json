@@ -1,0 +1,59 @@
+{
+  "config": {
+    "task": "knowledge_graph",
+    "dataset": "WN18RR",
+    "model": "RotatE",
+    "dim": 200,
+    "margin": 6.0,
+    "loss": "bce",
+    "num_neg": 64,
+    "label_smoothing": 0.0,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "batch_size": 256,
+    "epochs_run": 10,
+    "best_epoch": 10,
+    "n_params": 16379400,
+    "num_entities": 40943,
+    "num_relations": 11,
+    "best_val_mrr": 0.5024607330560684,
+    "test_mrr": 0.4571208953857422,
+    "test_hits@1": 0.4218251407146454,
+    "test_hits@3": 0.47479259967803955,
+    "test_hits@10": 0.5232929140329361,
+    "test_mean_rank": 5783.6573486328125,
+    "test_mrr_tail": 0.47952958941459656,
+    "test_mrr_head": 0.4347122013568878,
+    "train_time_total": 43.35406160354614,
+    "train_time_per_epoch": 4.307256831063165,
+    "wall_time_total": 43.73685836791992,
+    "seed": 42,
+    "tag": "wd0_RotatE"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.08451,
+      "val_mrr": 0.14446,
+      "val_hits@1": 0.12333,
+      "val_hits@10": 0.19667,
+      "train_seconds": 4.5888
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.01915,
+      "val_mrr": 0.4691,
+      "val_hits@1": 0.44833,
+      "val_hits@10": 0.51167,
+      "train_seconds": 4.3068
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.01182,
+      "val_mrr": 0.50246,
+      "val_hits@1": 0.47333,
+      "val_hits@10": 0.55667,
+      "train_seconds": 4.1196
+    }
+  ]
+}

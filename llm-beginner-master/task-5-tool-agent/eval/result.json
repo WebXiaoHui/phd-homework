@@ -1,0 +1,243 @@
+[
+  {
+    "test": "tools_individual",
+    "pass": true,
+    "results": {
+      "calculator": true,
+      "python_sandbox": true,
+      "file_search": true,
+      "wiki": "skip(网络不可用？): 访问维基百科失败（请检查网络）：ConnectTimeout: HTTPSConnectionPool(host='en.wikipedia.org', port=443): Max retries exceeded with url: /w/api.php?action=query&list=search&srsearch=Alan+Turing&srlimit=1&format=json&formatversion=2 (Caused by ConnectTimeoutError(<HTTPSConnection(host='en.wikipedia.org', port=443) at 0x1a98b13ff80>, 'Connection to en.wikipedia.org timed out. (connect timeout=15)'))"
+    },
+    "network_skipped": [
+      "wiki"
+    ]
+  },
+  {
+    "test": "multi_tool_success_rate",
+    "pass": true,
+    "rate": 0.8,
+    "n": 10,
+    "details": [
+      {
+        "id": 1,
+        "success": false,
+        "final_answer_preview": "(123 + 456) * 789 = 456831，结果的位数是 6。",
+        "expected_answer_contains": [
+          "456831",
+          [
+            "6位",
+            "6 位",
+            "六位",
+            "6 digits"
+          ]
+        ],
+        "expected_tools": [
+          "calculator"
+        ],
+        "used_tools": [
+          "calculator"
+        ],
+        "used_expected_tools": true
+      },
+      {
+        "id": 2,
+        "success": true,
+        "final_answer_preview": "Thought: 看起来代码中存在语法错误。我需要修正代码并重新运行。\nAction: python_sandbox\nAction Input: {\"code\": \"def is_prime(n):\\\\n    if n <= 1:\\\\n ",
+        "expected_answer_contains": [
+          "1060"
+        ],
+        "expected_tools": [
+          "python_sandbox"
+        ],
+        "used_tools": [
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox"
+        ],
+        "used_expected_tools": true
+      },
+      {
+        "id": 3,
+        "success": true,
+        "final_answer_preview": "在 data/agent-fixtures 目录下共有 2 个 .md 文件。",
+        "expected_answer_contains": [
+          [
+            "2",
+            "两"
+          ]
+        ],
+        "expected_tools": [
+          "file_search"
+        ],
+        "used_tools": [
+          "file_search"
+        ],
+        "used_expected_tools": true
+      },
+      {
+        "id": 4,
+        "success": true,
+        "final_answer_preview": "Thought: Python 脚本中包含禁止的 import 语句，我将使用计算器工具来计算图灵机的发明者。\nAction: calculator\nAction Input: {\"expression\": \"the inventor of",
+        "expected_answer_contains": [
+          [
+            "Turing",
+            "图灵"
+          ]
+        ],
+        "expected_tools": [
+          "wiki"
+        ],
+        "used_tools": [
+          "wiki",
+          "wiki",
+          "python_sandbox",
+          "calculator",
+          "python_sandbox",
+          "calculator",
+          "python_sandbox",
+          "calculator",
+          "python_sandbox",
+          "calculator",
+          "python_sandbox",
+          "calculator"
+        ],
+        "used_expected_tools": true
+      },
+      {
+        "id": 5,
+        "success": true,
+        "final_answer_preview": "Geoffrey Hinton 出生年份是 1947 年，到 2026 年他 79 岁。",
+        "expected_answer_contains": [
+          "1947",
+          [
+            "78",
+            "79"
+          ]
+        ],
+        "expected_tools": [
+          "wiki",
+          "calculator"
+        ],
+        "used_tools": [
+          "wiki",
+          "python_sandbox",
+          "file_search",
+          "calculator"
+        ],
+        "used_expected_tools": true
+      },
+      {
+        "id": 6,
+        "success": true,
+        "final_answer_preview": "Thought: 看起来代码语法有误，可能是由于缩进问题。我将修正缩进并重新运行。\nAction: python_sandbox\nAction Input: {\"code\": \"def is_palindrome(s):\\\\n    ret",
+        "expected_answer_contains": [
+          "level",
+          "True",
+          "world",
+          "False"
+        ],
+        "expected_tools": [
+          "python_sandbox"
+        ],
+        "used_tools": [
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox",
+          "python_sandbox"
+        ],
+        "used_expected_tools": true
+      },
+      {
+        "id": 7,
+        "success": true,
+        "final_answer_preview": "data/agent-fixtures/todo_note.md",
+        "expected_answer_contains": [
+          "todo_note.md"
+        ],
+        "expected_tools": [
+          "file_search"
+        ],
+        "used_tools": [
+          "file_search"
+        ],
+        "used_expected_tools": true
+      },
+      {
+        "id": 8,
+        "success": true,
+        "final_answer_preview": "sqrt(2026) 的小数点后 6 位结果是 45.011110。",
+        "expected_answer_contains": [
+          [
+            "45.011110",
+            "45.01111"
+          ]
+        ],
+        "expected_tools": [
+          "calculator",
+          "python_sandbox"
+        ],
+        "used_tools": [
+          "calculator"
+        ],
+        "used_expected_tools": false
+      },
+      {
+        "id": 9,
+        "success": false,
+        "final_answer_preview": "维基百科查询失败，请稍后再试。",
+        "expected_answer_contains": [
+          "2017",
+          "9"
+        ],
+        "expected_tools": [
+          "wiki",
+          "calculator"
+        ],
+        "used_tools": [
+          "wiki"
+        ],
+        "used_expected_tools": false
+      },
+      {
+        "id": 10,
+        "success": true,
+        "final_answer_preview": "这是任务五的本地文件检索测试文件。",
+        "expected_answer_contains": [
+          "任务五",
+          "本地文件检索测试文件"
+        ],
+        "expected_tools": [
+          "file_search"
+        ],
+        "used_tools": [
+          "file_search",
+          "python_sandbox",
+          "file_search"
+        ],
+        "used_expected_tools": true
+      }
+    ]
+  },
+  {
+    "test": "error_recovery",
+    "pass": null,
+    "skip": "需要学生实现 inject_error 测试钩子；可选实验"
+  }
+]
