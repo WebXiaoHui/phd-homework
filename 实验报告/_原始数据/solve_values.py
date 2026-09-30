@@ -66,7 +66,7 @@ def axes_boxes(a):
                     continue
                 cx0, cx1 = int(cols.min()), int(cols.max())
                 rowc = bg[:, cx0:cx1 + 1].sum(axis=1)
-                rows = np.nonzero(rowc > 0.6 * (cx1 - cx0))[0]
+                rows = np.nonzero(rowc > 0.35 * (cx1 - cx0))[0]
                 rows = rows[(rows >= y0 - 20) & (rows <= y1 + 20)]
                 if len(rows) == 0:
                     continue
@@ -77,11 +77,28 @@ def axes_boxes(a):
                         segs.append((s, rows[k - 1]))
                         s = rows[k]
                 segs.append((s, rows[-1]))
-                if len(segs) > 1:
-                    segs = [max(segs, key=lambda t: t[1] - t[0])]
-                ry0, ry1 = int(segs[0][0]), int(segs[0][1])
+                # 取"起点最高、终点最低"的那段：曲线贴顶时中间会出现低 BG 行，
+                # 不能只取最长的一段，否则坐标轴会被截短（PET 就踩过这个坑）。
+                ry0 = int(min(t[0] for t in segs))
+                ry1 = int(max(t[1] for t in segs))
                 boxes.append((cx0, ry0, cx1, ry1))
     boxes = sorted(set(boxes), key=lambda b: ((b[1] + 60) // 400, b[0]))
+    # --- 几何校正：同一张图里所有子图的高度应当一致；若某子图因曲线贴顶被截短，
+    #     就把它吸附到"包含它、且高度正常"的公共行带（top/bottom 组合）上。
+    if boxes:
+        hmax = max(b[3] - b[1] for b in boxes)
+        bands = sorted({(b[1], b[3]) for b in boxes if b[3] - b[1] >= 0.9 * hmax})
+        fixed = []
+        for (bx0, by0, bx1, by1) in boxes:
+            if by1 - by0 >= 0.9 * hmax:
+                fixed.append((bx0, by0, bx1, by1)); continue
+            cand = [bd for bd in bands if bd[0] <= by0 and bd[1] >= by1 + 40]
+            if cand:
+                bd = min(cand, key=lambda t: t[1] - t[0])
+                fixed.append((bx0, bd[0], bx1, bd[1]))
+            else:
+                fixed.append((bx0, by0, bx1, by1))
+        boxes = sorted(set(fixed), key=lambda b: ((b[1] + 60) // 400, b[0]))
     return bg, boxes
 
 

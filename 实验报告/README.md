@@ -79,13 +79,15 @@
 该目录**没有 `日志.md`**，结果以「训练曲线图 PNG + 终端截图 + checkpoint 目录」为准；
 曲线指标由 [`_原始数据/extract_all.py`](_原始数据/extract_all.py) 做刻度标定后像素反解得到
 （与终端截图交叉验证一致，见 [`_原始数据/transformers_结果提取.md`](_原始数据/transformers_结果提取.md)）。
+其中 SimCSE 的 **F1 0.70541 / spearman 0.56527 / recall 0.99546**、p-tuning 的 **F1 0.64000**
+都能与终端截图的原始打印对上；PET 无终端截图，只有曲线一个来源。
 
 | 报告 | 完成度 | 关键指标 |
 |---|---|---|
 | [01 文本分类 BERT](Transformers实战/01_文本分类_BERT_实验报告.md) | 跑过，但只在 step 200 评测 1 次 | 8 分类 dev：acc 0.32 / precision 0.34 / recall 0.32 / **F1 0.26**（欠训练 + 单点评测） |
 | [02 文本匹配（有监督）](Transformers实战/02_文本匹配_有监督_实验报告.md) | 3 个模型都跑通 | **PointWise（单塔）F1 0.90** > Sentence-BERT 双塔 0.818 > DSSM 双塔 0.61 |
 | [03 文本匹配（无监督 SimCSE）](Transformers实战/03_文本匹配_无监督SimCSE_实验报告.md) | 跑通（47.7 万对语料） | **F1 0.7054、spearman 0.5653**（终端截图原始值）；precision 0.546 / recall 0.995 |
-| [04 Prompt 学习 PET / p-tuning](Transformers实战/04_Prompt学习_PET与p-tuning_实验报告.md) | 两者都跑通（小样本 61 条） | PET **F1 0.747**；p-tuning **F1 0.640**（截图原始值）；`电器` 类 F1=0 |
+| [04 Prompt 学习 PET / p-tuning](Transformers实战/04_Prompt学习_PET与p-tuning_实验报告.md) | 两者都跑通（小样本 61 条） | PET **F1 峰值 0.771 / 末端 0.750**；p-tuning **F1 0.640**（截图原始值）；⚠️ train 只有 8 类而 dev 有 10 类，`电器` 类 F1=0 |
 | [05 RLHF 奖励模型](Transformers实战/05_RLHF_奖励模型_实验报告.md) | 只完成第一阶段 | 奖励模型 eval/acc ≈ **0.666**；⚠️ **PPO 阶段未运行** |
 | [06 文本生成：问答与 Filling](Transformers实战/06_文本生成_问答与Filling_实验报告.md) | 问答跑通 / filling 无指标 | DuReaderQG：BLEU-1~4 = **0.097 / 0.063 / 0.035 / 0.023**；filling 只有截图，**无可用指标** |
 | [07 未运行子任务说明](Transformers实战/07_未运行子任务说明_LLM微调与应用_实验报告.md) | 4 个子任务未运行 | ChatGLM-6B 微调、LLM zero-shot、UIE、LLMsTrainer/llms_mbti：**只有代码，没有结果** |
@@ -115,13 +117,21 @@
 | 文件 | 用途 |
 |---|---|
 | `图神经网络_结果汇总.md` | 由四个任务的 `results.jsonl` 统计出的完整结果表 + 自动统计 |
-| `transformers_结果提取.md` | Transformers 部分的配置表、曲线反解指标、终端截图逐字记录、交叉验证 |
-| `analyze_charts.py` / `extract_metrics.py` / `solve_values.py` / `curve_read.py` / `extract_all.py` | 读图工具链：定位子图 → 检测网格线 → 刻度标定 → 反解单点值/曲线值 |
-| `build_strips.py` | 把各子图的 y 轴刻度标签区裁剪拼图，便于人工读刻度（`strips_*.png` 为中间产物） |
+| `transformers_结果提取.md` | Transformers 部分的配置表、曲线反解指标、终端截图逐字记录、交叉验证，以及 F 节记录的"一次已修正的读图事故" |
+| `solve_values.py` | 读图核心：定位子图（含曲线贴顶时的行带校正）→ 检测白色网格线 → 用"漂亮步长 × 候选值"二维搜索反解**单点子图**的数值 |
+| `extract_all.py` | 按人工读出的刻度标签，输出本目录 transformers 报告所用的**全部指标**（单点值 / 曲线 min-max-末端） |
+| `check_edges.py` | 质量检查：逐条曲线报告它离坐标轴上/下边缘的距离，用来判断"曲线是否真的被裁剪" |
+| `analyze_charts.py` | 结构探针：列出每张图有几个子图、子图框位置、橙色像素分布 |
+| `build_strips.py` | 把各子图的 y 轴刻度标签区裁剪拼图（输出 `strips_*.png`），便于人工读刻度 |
 
 复现方式（Windows Python，需 matplotlib + numpy + Pillow）：
 
 ```bash
-python _原始数据/solve_values.py   "<曲线图路径>"
-python _原始数据/extract_all.py    # 输出本目录 transformers 报告所用的全部指标
+python _原始数据/solve_values.py "<曲线图路径>"   # 看子图结构与单点反解
+python _原始数据/extract_all.py                  # 输出全部指标
+python _原始数据/check_edges.py                  # 检查曲线是否被坐标轴裁剪
 ```
+
+> ⚠️ 读图方法有一个已修正的坑，见 `transformers_结果提取.md` F 节：
+> 若用"每行背景像素占比"判定坐标轴范围，遇到**长距离贴顶的曲线**会把坐标轴截短，
+> 从而把正常曲线误判成"被裁剪"。修正后所有曲线距轴边界都是 16~19px（= 默认 5% 边距）。

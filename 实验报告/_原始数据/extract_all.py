@@ -68,11 +68,12 @@ SPEC = [
      [0.55, 0.50, 0.45, 0.40]),
 
     ("PET", r"prompt_tasks\PET\logs\comment_classify\BERT-PET.png", 1,
-     [0.76, 0.74, 0.72, 0.70, 0.68, 0.66]),
+     [0.78, 0.76, 0.74, 0.72, 0.70, 0.68, 0.66]),
     ("PET", r"prompt_tasks\PET\logs\comment_classify\BERT-PET.png", 2, [0.80, 0.78, 0.76, 0.74]),
     ("PET", r"prompt_tasks\PET\logs\comment_classify\BERT-PET.png", 3,
+     [0.78, 0.76, 0.74, 0.72, 0.70, 0.68, 0.66]),
+    ("PET", r"prompt_tasks\PET\logs\comment_classify\BERT-PET.png", 4,
      [0.76, 0.74, 0.72, 0.70, 0.68, 0.66]),
-    ("PET", r"prompt_tasks\PET\logs\comment_classify\BERT-PET.png", 4, [0.74, 0.72, 0.70, 0.68, 0.66]),
 
     ("p-tuning", r"prompt_tasks\p-tuning\logs\comment_classify\BERT.png", 1,
      [0.65, 0.64, 0.63, 0.62, 0.61, 0.60]),
