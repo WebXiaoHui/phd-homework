@@ -1,0 +1,149 @@
+# =============================================================================
+#  入学任务仓库 —— .gitignore
+#
+#  收录原则：
+#    ✅ 全部代码（*.py / *.sh / *.ipynb / 配置 ...）
+#    ✅ 全部文档（*.md）与实验产物（results/ logs/ eval/ figures/）
+#    ✅ 少量体积很小的复现夹具（agent-fixtures、gold_qa、索引元数据）
+#    ❌ 模型权重（checkpoints/ models/、*.pt *.bin *.safetensors *.onnx ...）
+#    ❌ 数据集（data/、*.jsonl 大文件、*.npy *.parquet *.tsv ...）
+#    ❌ 缓存与压缩包（__pycache__ .idea .cache *.zip *.pdf ...）
+#
+#  写法：先"全部忽略"，再按扩展名/路径"放行"，最后把大文件目录"重新排除"。
+#  gitignore 是后匹配优先，所以顺序很重要，不要随意调换。
+# =============================================================================
+
+# ---------- 1. 默认忽略一切，但保留目录以便继续向下匹配 ----------
+*
+!*/
+
+# ---------- 2. 实验结果 / 训练日志 / 评测产物（核心交付物）----------
+!**/results/**
+!**/logs/**
+!**/log/**
+!**/result.json
+!**/results.json
+!**/eval/**
+!**/figures/**
+!**/assets/**
+
+# ---------- 3. 代码 ----------
+!*.py
+!*.ipynb
+!*.sh
+!*.bash
+!*.bat
+!*.cmd
+!*.ps1
+!*.c
+!*.h
+!*.cc
+!*.cpp
+!*.hpp
+!*.cu
+!*.java
+!*.js
+!*.ts
+!*.html
+!*.css
+!*.sql
+!*.proto
+!Makefile
+!Dockerfile
+
+# ---------- 4. 文档 / 配置 ----------
+!*.md
+!*.rst
+!*.txt
+!*.json
+!*.jsonl
+!*.yaml
+!*.yml
+!*.toml
+!*.cfg
+!*.ini
+!*.conf
+!*.properties
+!LICENSE*
+!.gitignore
+!**/.gitignore
+!*.gitattributes
+
+# ---------- 5. 排除：模型权重 / 数据集 / 缓存 / 压缩包（体积与二进制）----------
+**/checkpoints/**
+**/models/**
+**/data/**
+**/_download_cache/**
+**/__pycache__/**
+**/__pypackages__/**
+**/.idea/**
+**/.vs/**
+**/.vscode/**
+**/.claude/**
+**/.ipynb_checkpoints/**
+**/.pytest_cache/**
+**/.mypy_cache/**
+**/wandb/**
+**/.cache/**
+
+# 常见权重/张量/数据集文件后缀
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.onnx_data
+*.ckpt
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.faiss
+*.pkl
+*.pickle
+*.parquet
+*.arrow
+*.feather
+*.msgpack
+*.model
+*.data
+*.dat
+*.tsv
+*.csv
+*.bpe
+*.vocab
+*.spm
+*.whl
+*.so
+*.dll
+*.dylib
+*.exe
+*.zip
+*.tar
+*.tgz
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.pdf
+*.gif
+*.mp4
+*.avi
+*.mov
+*.wav
+*.mp3
+
+# ---------- 6. 重新放行 data/ 下体积很小、复现必需的代码与夹具 ----------
+#    （放在第 5 节之后，用 `git check-ignore -v <path>` 可验证最终生效规则）
+!**/data/download.py
+!llm-beginner-master/task-4-rag/data/gold_qa.jsonl
+!llm-beginner-master/task-4-rag/data/index/meta.json
+!llm-beginner-master/task-4-rag/data/index/chunks.json
+!llm-beginner-master/task-5-tool-agent/data/**
+!llm-beginner-master/task-6-coding-agent/data/toy-repo/**
+!llm-beginner-master/task-6-coding-agent/data/download.py
+
+# toy-repo 里由测试生成的缓存不要再传
+llm-beginner-master/task-6-coding-agent/data/toy-repo/.pytest_cache/
+llm-beginner-master/task-6-coding-agent/data/toy-repo/__pycache__/
