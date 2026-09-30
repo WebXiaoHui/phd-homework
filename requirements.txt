@@ -1,0 +1,73 @@
+# ============================================================================
+# 图神经网络入门四个任务的运行环境
+#
+# 本文件记录的是「实测跑通」的版本组合，不是随便写的推荐版本。
+# 环境信息：
+#     Python   3.9.18
+#     PyTorch  2.3.1 + CUDA 12.1
+#     显卡     NVIDIA GeForce RTX 3070 Ti (8 GB)
+#     系统     Windows 11 + WSL2 (Ubuntu 22.04)
+# ============================================================================
+
+# ---- 深度学习框架 ----
+torch==2.3.1
+torchvision==0.18.1
+
+# ---- 图神经网络框架 ----
+# ⚠️ 重要：这里锁定 PyG 2.0.4，不是最新版。
+#    后面四个任务的所有代码都是按 PyG 2.0.4 的 API 写的、并在这个版本上跑通的。
+#    升级到更新的 PyG 版本后，import 路径和部分算子签名会变（比如
+#    torch_geometric.nn.global_min_pool 就没有），可能需要改代码。
+torch-geometric==2.0.4
+
+# ---- PyG 的底层算子库 ----
+# ⚠️ 这四个必须和 torch 版本严格对应（pt23 + cu121 就是 "PyTorch 2.3 + CUDA 12.1"）。
+#    直接 pip install torch-scatter 会去编译源码、大概率失败，
+#    正确装法是去 https://data.pyg.org/whl/ 找对应版本的预编译包：
+#
+#    pip install torch-scatter torch-sparse torch-cluster torch-spline-conv \
+#        -f https://data.pyg.org/whl/torch-2.3.1+cu121.html
+#
+#    国内网络如果连不上，可以加清华镜像：
+#    pip install torch-scatter torch-sparse torch-cluster torch-spline-conv \
+#        -f https://data.pyg.org/whl/torch-2.3.1+cu121.html \
+#        -i https://pypi.tuna.tsinghua.edu.cn/simple
+torch-scatter==2.1.2
+torch-sparse==0.6.18
+torch-cluster==1.6.3
+torch-spline-conv==1.2.2
+
+# ---- 数据处理 ----
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.0
+
+# ---- 图算法（建图、连通性检验等）----
+networkx==3.2.1
+
+# ---- 评估指标与数据集划分 ----
+scikit-learn==1.4.2
+
+# ---- 画图 ----
+matplotlib==3.8.4
+
+# ---- 进度条 ----
+tqdm==4.66.2
+
+
+# ============================================================================
+# 关于数据集
+# ============================================================================
+# 四个任务用到的数据集总共约 1.5 GB，已经全部下载好放在各自的 data/ 目录里，
+# 不需要重新下载。如果想重新获取，运行各任务 code/ 下的 prepare_data.py。
+#
+# 数据集清单：
+#   任务一 / 任务二：Cora、Citeseer、Flickr          (Planetoid + Flickr)
+#   任务三：MUTAG、PROTEINS、ENZYMES、IMDB-BINARY、ZINC  (TUDataset + ZINC)
+#   任务四：WN18RR、FB15k-237
+#
+# 国内网络下载这些数据集时踩过的坑（脚本里已处理好镜像）：
+#   - PyG 的 Planetoid 默认从 github 拉，国内经常超时 → 改用 jsdelivr / ghproxy 镜像
+#   - TUDataset 从 chrsmrrs.com 拉 → 可用
+#   - ZINC 从 data.dgl.ai 拉 → 可用
+#   - 任务四的 WN18RR / FB15k-237 需要手动下载后放到 data/ 下
