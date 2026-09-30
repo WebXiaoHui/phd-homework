@@ -4,13 +4,18 @@
 #  收录原则：
 #    ✅ 全部代码（*.py / *.sh / *.ipynb / 配置 ...）
 #    ✅ 全部文档（*.md）与实验产物（results/ logs/ eval/ figures/）
-#    ✅ 少量体积很小的复现夹具（agent-fixtures、gold_qa、索引元数据）
+#    ✅ 少量体积很小的复现入口（各任务的 data/download.py、RAG 的 gold_qa.jsonl）
 #    ❌ 模型权重（checkpoints/ models/、*.pt *.bin *.safetensors *.onnx ...）
 #    ❌ 数据集（data/、*.jsonl 大文件、*.npy *.parquet *.tsv ...）
 #    ❌ 缓存与压缩包（__pycache__ .idea .cache *.zip *.pdf ...）
 #
 #  写法：先"全部忽略"，再按扩展名/路径"放行"，最后把大文件目录"重新排除"。
 #  gitignore 是后匹配优先，所以顺序很重要，不要随意调换。
+#
+#  ⚠️ 注意：`llm-beginner-master/task-*/` 下还有作业自带的 .gitignore（ckpt/、
+#     data/agent-fixtures/、data/toy-repo/、data/index/ 等）。**下层文件的规则优先**，
+#     所以这些目录由各自的 .gitignore 决定：它们都是"可由 data/download.py 重新生成"
+#     的产物，不入库是作业原本的设计。
 # =============================================================================
 
 # ---------- 1. 默认忽略一切，但保留目录以便继续向下匹配 ----------
@@ -65,6 +70,7 @@
 !*.conf
 !*.properties
 !LICENSE*
+!*.png
 !.gitignore
 !**/.gitignore
 !*.gitattributes
@@ -134,16 +140,9 @@
 *.wav
 *.mp3
 
-# ---------- 6. 重新放行 data/ 下体积很小、复现必需的代码与夹具 ----------
-#    （放在第 5 节之后，用 `git check-ignore -v <path>` 可验证最终生效规则）
+# ---------- 6. 重新放行 data/ 下体积很小、复现必需的入口文件 ----------
+#    （放在第 5 节之后；用 `git check-ignore -v <path>` 可验证最终生效规则）
+#    注意：agent-fixtures / index/ / toy-repo 由各任务自带的 .gitignore 排除，
+#    它们是 data/download.py 能重新生成的产物，不强行入库。
 !**/data/download.py
 !llm-beginner-master/task-4-rag/data/gold_qa.jsonl
-!llm-beginner-master/task-4-rag/data/index/meta.json
-!llm-beginner-master/task-4-rag/data/index/chunks.json
-!llm-beginner-master/task-5-tool-agent/data/**
-!llm-beginner-master/task-6-coding-agent/data/toy-repo/**
-!llm-beginner-master/task-6-coding-agent/data/download.py
-
-# toy-repo 里由测试生成的缓存不要再传
-llm-beginner-master/task-6-coding-agent/data/toy-repo/.pytest_cache/
-llm-beginner-master/task-6-coding-agent/data/toy-repo/__pycache__/
